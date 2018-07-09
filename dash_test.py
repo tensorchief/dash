@@ -12,12 +12,22 @@ df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/' +
 
 app = dash.Dash()
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+app.layout = html.Div(style={'backgroundColor': '#111111'}, children=[
+    html.H1(children='Hello Dash',
+            style={
+                'fontFamily': 'Calibri',
+                'textAlign': 'center',
+                'color': '#cccccc'
+            }),
 
     html.Div(children='''
         Dash: A web application framework for Python
-    '''),
+    ''',
+             style={
+                 'fontFamily': 'Calibri',
+                 'textAlign': 'center',
+                 'color': '#cccccc'
+             }),
 
     dcc.Graph(
         id='example-graph',
@@ -41,7 +51,29 @@ app.layout = html.Div(children=[
                 yaxis={'type': 'log', 'title': 'Population'},
                 margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
                 legend={'x': 0, 'y': 1},
-                hovermode='closest'
+                hovermode='closest',
+                paper_bgcolor='#111111',
+                plot_bgcolor='#111111'
+            )
+        }
+    ),
+
+    dcc.Graph(
+        id='pie',
+        figure={
+            'data': [
+                go.Pie(
+                    labels=df['continent'],
+                    values=df['population'],
+                    hole=0.5,
+                    textfont={
+                        'family': 'Calibri'
+                    }
+                )
+            ],
+            'layout': go.Layout(
+                    paper_bgcolor='#111111',
+                    plot_bgcolor='#111111'
             )
         }
     )
